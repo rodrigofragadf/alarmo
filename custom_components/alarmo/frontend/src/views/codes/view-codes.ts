@@ -65,7 +65,8 @@ export class AlarmViewCodes extends SubscribeMixin(LitElement) {
         ></user-editor-card>
       `;
     } else {
-      const codesInUse = this.data.code_arm_required || this.data.code_disarm_required || this.data.code_mode_change_required;
+      const codesInUse =
+        this.data.code_arm_required || this.data.code_disarm_required || this.data.code_mode_change_required;
 
       return html`
         <ha-card header="${localize('panels.codes.title', this.hass.language)}">
@@ -124,9 +125,7 @@ export class AlarmViewCodes extends SubscribeMixin(LitElement) {
               ${localize('panels.codes.cards.codes.fields.code_format.description', this.hass.language)}
             </span>
             <mwc-button
-              class="${this.data.code_format == 'number' ? 'active' : ''} ${!codesInUse
-                ? 'disabled'
-                : ''}"
+              class="${this.data.code_format == 'number' ? 'active' : ''} ${!codesInUse ? 'disabled' : ''}"
               @click=${() => {
                 this.saveData({ code_format: 'number' });
               }}
@@ -135,10 +134,7 @@ export class AlarmViewCodes extends SubscribeMixin(LitElement) {
               ${localize('panels.codes.cards.codes.fields.code_format.code_format_number', this.hass.language)}
             </mwc-button>
             <mwc-button
-              class="${this.data.code_format == 'text' ? 'active' : ''} ${!codesInUse
-                ? 'disabled'
-                : ''
-              }"
+              class="${this.data.code_format == 'text' ? 'active' : ''} ${!codesInUse ? 'disabled' : ''}"
               @click=${() => {
                 this.saveData({ code_format: 'text' });
               }}

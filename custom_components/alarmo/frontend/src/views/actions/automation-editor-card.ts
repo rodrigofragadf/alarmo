@@ -82,7 +82,7 @@ export class AutomationEditorCard extends LitElement {
     this.alarmoConfig = await fetchConfig(this.hass);
 
     if (this.item) {
-      let actions = this.item.actions.map(e => (e.entity_id ? e : omit(e, 'entity_id')));
+      const actions = this.item.actions.map(e => (e.entity_id ? e : omit(e, 'entity_id')));
       this.config = { ...this.item, actions: [actions[0], ...actions.slice(1)] };
       if (this.config.triggers.length > 1) this.config = { ...this.config, triggers: [this.config.triggers[0]] };
 
@@ -325,8 +325,8 @@ export class AutomationEditorCard extends LitElement {
   }
 
   private renderActions() {
-    let selectedEntities = this.config.actions.map(e => e.entity_id);
-    let actions = computeActions(selectedEntities, this.hass);
+    const selectedEntities = this.config.actions.map(e => e.entity_id);
+    const actions = computeActions(selectedEntities, this.hass);
 
     if (!actions.length) return;
 
@@ -358,7 +358,7 @@ export class AutomationEditorCard extends LitElement {
   private _setEvent(ev: CustomEvent) {
     ev.stopPropagation();
     const value = ev.detail.value as EAlarmEvent;
-    let triggerConfig = this.config.triggers;
+    const triggerConfig = this.config.triggers;
     Object.assign(triggerConfig, { [0]: { ...triggerConfig[0], event: value } });
     this.config = { ...this.config, triggers: triggerConfig };
     if (Object.keys(this.errors).includes('event')) this._validateConfig();
@@ -367,7 +367,7 @@ export class AutomationEditorCard extends LitElement {
   private _setArea(ev: CustomEvent) {
     ev.stopPropagation();
     const value = ev.detail.value;
-    let triggerConfig = this.config.triggers;
+    const triggerConfig = this.config.triggers;
     Object.assign(triggerConfig, { [0]: { ...triggerConfig[0], area: value } });
     const armModes = getArmModeOptions(value, this.areas!);
 
@@ -394,7 +394,7 @@ export class AutomationEditorCard extends LitElement {
   private _setEntity(ev: CustomEvent) {
     ev.stopPropagation();
     const selectedEntities = ev.detail.value as string[];
-    let actionConfig = this.config.actions;
+    const actionConfig = this.config.actions;
 
     //assign service for added entity if it is in common
     let serviceSetting: string | null = null;
@@ -421,15 +421,15 @@ export class AutomationEditorCard extends LitElement {
   }
 
   private _setAction(selectedAction: string) {
-    let actionConfig = this.config.actions;
+    const actionConfig = this.config.actions;
 
-    let selectedEntities = this.config.actions.map(e => e.entity_id);
-    let availableActions = computeActions(selectedEntities, this.hass);
+    const selectedEntities = this.config.actions.map(e => e.entity_id);
+    const availableActions = computeActions(selectedEntities, this.hass);
     if (!availableActions.length) return;
 
     actionConfig.forEach((e, i) => {
-      let actions = computeActions(e.entity_id, this.hass);
-      let service = findMatchingAction(actions, selectedAction);
+      const actions = computeActions(e.entity_id, this.hass);
+      const service = findMatchingAction(actions, selectedAction);
       Object.assign(actionConfig, { [i]: { service: service, ...omit(e, 'service') } });
     });
     this.config = { ...this.config, actions: actionConfig };
@@ -445,7 +445,7 @@ export class AutomationEditorCard extends LitElement {
   private _setYaml(ev: CustomEvent): void {
     let value = ev.detail.value;
 
-    let actionConfig: [AutomationAction, ...AutomationAction[]] = [{}];
+    const actionConfig: [AutomationAction, ...AutomationAction[]] = [{}];
 
     if (isObject(value)) value = [value];
 
@@ -483,7 +483,7 @@ export class AutomationEditorCard extends LitElement {
     const services = data.actions.map(e => e.service).filter(isDefined);
     if (!services.length || !services.every(e => isValidService(e, this.hass))) {
       this.errors = { ...this.errors, service: true };
-      let availableActions = computeActions(entities, this.hass);
+      const availableActions = computeActions(entities, this.hass);
       if (!availableActions.length && services.length) this.viewMode = ViewMode.Yaml;
     }
 

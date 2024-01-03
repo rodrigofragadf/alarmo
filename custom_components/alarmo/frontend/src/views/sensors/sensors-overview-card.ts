@@ -103,7 +103,11 @@ export class SensorsOverviewCard extends SubscribeMixin(LitElement) {
         renderer: (data: AlarmoSensor) => {
           const stateObj = this.hass.states[data.entity_id];
           const type = Object.keys(ESensorTypes).find(e => ESensorTypes[e] == data.type) as ESensorTypes;
-          const icon = stateObj ? stateObj.state === "on" ? ESensorIconsActive[type] : ESensorIcons[type] : 'hass:help-circle-outline';
+          const icon = stateObj
+            ? stateObj.state === 'on'
+              ? ESensorIconsActive[type]
+              : ESensorIcons[type]
+            : 'hass:help-circle-outline';
           return data.area == noArea
             ? html`
                 ${warningTooltip()}

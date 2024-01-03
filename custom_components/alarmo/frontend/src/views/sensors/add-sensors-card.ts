@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { UnsubscribeFunc } from 'home-assistant-js-websocket';
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators';
@@ -173,12 +174,14 @@ export class AddSensorsCard extends SubscribeMixin(LitElement) {
     const filterConfig: TableFilterConfig = {
       isSupportedType: {
         name: localize('panels.sensors.cards.add_sensors.actions.filter_supported', this.hass!.language),
-        items: [{
-          value: 'true',
-          name: 'true'
-        }],
+        items: [
+          {
+            value: 'true',
+            name: 'true',
+          },
+        ],
         value: ['true'],
-        binary: true
+        binary: true,
       },
     };
     return filterConfig;

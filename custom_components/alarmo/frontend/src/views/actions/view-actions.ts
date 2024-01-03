@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { loadHaForm } from '../../load-ha-elements';
@@ -113,10 +114,10 @@ export class AlarmViewActions extends SubscribeMixin(LitElement) {
                 `
               : item.type == EAutomationTypes.Notification
               ? html`
-                  <ha-icon icon="hass:message-text-outline"  class="${!item.enabled ? 'disabled' : ''}"></ha-icon>
+                  <ha-icon icon="hass:message-text-outline" class="${!item.enabled ? 'disabled' : ''}"></ha-icon>
                 `
               : html`
-                  <ha-icon icon="hass:flash"  class="${!item.enabled ? 'disabled' : ''}"></ha-icon>
+                  <ha-icon icon="hass:flash" class="${!item.enabled ? 'disabled' : ''}"></ha-icon>
                 `,
         },
         name: {
@@ -220,7 +221,7 @@ export class AlarmViewActions extends SubscribeMixin(LitElement) {
   private getAreaForAutomation = (automation: AlarmoAutomation) => {
     if (!this.config) return;
     const areaOptions = getAreaOptions(this.areas, this.config);
-    let area = automation.triggers[0].area;
+    const area = automation.triggers[0].area;
     return isDefined(area) && areaOptions.includes(area) ? area : undefined;
   };
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { HassEntity } from 'home-assistant-js-websocket';
 import { AlarmoSensor, EArmModes, Dictionary, HomeAssistant } from '../types';
 import { computeDomain, computeName, getDomain, sortAlphabetically } from '../helpers';

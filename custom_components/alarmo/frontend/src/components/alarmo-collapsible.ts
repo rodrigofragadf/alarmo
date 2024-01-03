@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { css, html, LitElement, PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators';
 
@@ -27,7 +28,7 @@ class AlarmoCollabsibleGroup extends LitElement {
     if (el.getAttribute('active')) el.removeAttribute('active');
     else el.setAttribute('active', 'true');
 
-    let active = this.querySelectorAll('alarmo-collapsible-header[active]');
+    const active = this.querySelectorAll('alarmo-collapsible-header[active]');
 
     active.forEach(function(i) {
       if (i !== el) i.removeAttribute('active');

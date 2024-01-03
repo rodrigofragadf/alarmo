@@ -83,7 +83,7 @@ export class NotificationEditorCard extends LitElement {
     this.alarmoConfig = await fetchConfig(this.hass);
 
     if (this.item) {
-      let actions = this.item.actions.map(e => omit(e, 'entity_id'));
+      const actions = this.item.actions.map(e => omit(e, 'entity_id'));
       this.config = { ...this.item, actions: [actions[0], ...actions.slice(1)] };
       if (this.config.triggers.length > 1) this.config = { ...this.config, triggers: [this.config.triggers[0]] };
 
@@ -243,7 +243,10 @@ export class NotificationEditorCard extends LitElement {
                         </span>
 
                         <alarmo-select
-                          .items=${computeEntityDisplay(getEntitiesByDomain(this.hass, 'media_player', 'tts'), this.hass)}
+                          .items=${computeEntityDisplay(
+                            getEntitiesByDomain(this.hass, 'media_player', 'tts'),
+                            this.hass
+                          )}
                           label=${localize('panels.actions.cards.new_action.fields.entity.heading', this.hass.language)}
                           .value=${this.config.actions[0].data?.entity_id || ''}
                           @value-changed=${this._setEntity}
@@ -440,7 +443,7 @@ export class NotificationEditorCard extends LitElement {
   private _setEvent(ev: CustomEvent) {
     ev.stopPropagation();
     const value = ev.detail.value as EAlarmEvent;
-    let triggerConfig = this.config.triggers;
+    const triggerConfig = this.config.triggers;
     Object.assign(triggerConfig, { [0]: { ...triggerConfig[0], event: value } });
     this.config = { ...this.config, triggers: triggerConfig };
     if (Object.keys(this.errors).includes('event')) this._validateConfig();
@@ -449,7 +452,7 @@ export class NotificationEditorCard extends LitElement {
   private _setArea(ev: CustomEvent) {
     ev.stopPropagation();
     const value = ev.detail.value;
-    let triggerConfig = this.config.triggers;
+    const triggerConfig = this.config.triggers;
     Object.assign(triggerConfig, { [0]: { ...triggerConfig[0], area: value } });
     const armModes = getArmModeOptions(value, this.areas!);
 
@@ -467,7 +470,7 @@ export class NotificationEditorCard extends LitElement {
   private _setModes(ev: CustomEvent) {
     ev.stopPropagation();
     const value = ev.detail.value as EArmModes[0];
-    let triggerConfig = this.config.triggers;
+    const triggerConfig = this.config.triggers;
     Object.assign(triggerConfig, { [0]: { ...triggerConfig[0], modes: value } });
     this.config = { ...this.config, triggers: triggerConfig };
     if (Object.keys(this.errors).includes('modes')) this._validateConfig();
@@ -476,7 +479,7 @@ export class NotificationEditorCard extends LitElement {
   private _setService(ev: CustomEvent) {
     ev.stopPropagation();
     const value = String(ev.detail.value);
-    let actionConfig = this.config.actions;
+    const actionConfig = this.config.actions;
     Object.assign(actionConfig, { [0]: { ...actionConfig[0], service: value, ...omit(actionConfig[0], 'service') } });
     if ((actionConfig[0].data || {}).entity_id && computeDomain(value) == 'notify')
       Object.assign(actionConfig, {
@@ -489,7 +492,7 @@ export class NotificationEditorCard extends LitElement {
   private _setTitle(ev: Event) {
     ev.stopPropagation();
     const value = (ev.target as HTMLInputElement).value;
-    let actionConfig = this.config.actions;
+    const actionConfig = this.config.actions;
     Object.assign(actionConfig, {
       [0]: {
         ...actionConfig[0],
@@ -504,7 +507,7 @@ export class NotificationEditorCard extends LitElement {
   private _setEntity(ev: Event) {
     ev.stopPropagation();
     const value = (ev.target as HTMLInputElement).value;
-    let actionConfig = this.config.actions;
+    const actionConfig = this.config.actions;
     Object.assign(actionConfig, {
       [0]: {
         ...actionConfig[0],
@@ -517,7 +520,7 @@ export class NotificationEditorCard extends LitElement {
   }
 
   private _setMessage(value: string) {
-    let actionConfig = this.config.actions;
+    const actionConfig = this.config.actions;
     Object.assign(actionConfig, {
       [0]: {
         ...actionConfig[0],
@@ -714,7 +717,7 @@ export class NotificationEditorCard extends LitElement {
     let message = this.config.actions[0].data?.message || '';
     message = message.replace(/{{open_sensors(\|[^}]+)?}}/, value);
 
-    let actionConfig = this.config.actions;
+    const actionConfig = this.config.actions;
     Object.assign(actionConfig, {
       [0]: {
         ...actionConfig[0],
@@ -738,7 +741,7 @@ export class NotificationEditorCard extends LitElement {
     let message = this.config.actions[0].data?.message || '';
     message = message.replace(/{{arm_mode(\|[^}]+)?}}/, value);
 
-    let actionConfig = this.config.actions;
+    const actionConfig = this.config.actions;
     Object.assign(actionConfig, {
       [0]: {
         ...actionConfig[0],

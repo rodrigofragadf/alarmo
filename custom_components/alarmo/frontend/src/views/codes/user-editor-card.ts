@@ -27,7 +27,7 @@ export class UserEditorCard extends LitElement {
   };
 
   @property()
-  repeatCode: string = '';
+  repeatCode = '';
 
   users?: Dictionary<AlarmoUser>;
   areas: Dictionary<AlarmoArea> = {};
@@ -241,7 +241,7 @@ export class UserEditorCard extends LitElement {
   }
 
   getAreaOptions(): { value: string; name: string }[] {
-    let areas = Object.keys(this.areas || {}).map(e =>
+    const areas = Object.keys(this.areas || {}).map(e =>
       Object({
         value: e,
         name: this.areas[e].name,

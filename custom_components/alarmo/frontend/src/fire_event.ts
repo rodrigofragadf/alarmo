@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Polymer legacy event helpers used courtesy of the Polymer project.
 //
 // Copyright (c) 2017 The Polymer Authors. All rights reserved.
@@ -42,7 +43,7 @@ export interface HASSDomEvent<T> extends Event {
 export const fireEvent = (
   node: HTMLElement | Window,
   type: string,
-  detail?: Object,
+  detail?: Record<string, any>,
   options?: {
     bubbles?: boolean;
     cancelable?: boolean;
@@ -55,7 +56,7 @@ export const fireEvent = (
   const event = new Event(type, {
     bubbles: options.bubbles === undefined ? true : options.bubbles,
     cancelable: Boolean(options.cancelable),
-    composed: options.composed === undefined ? true : options.composed
+    composed: options.composed === undefined ? true : options.composed,
   });
   (event as any).detail = detail;
   node.dispatchEvent(event);

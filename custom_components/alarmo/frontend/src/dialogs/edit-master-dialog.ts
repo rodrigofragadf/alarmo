@@ -28,9 +28,8 @@ export class EditMasterDialog extends LitElement {
     return html`
       <ha-dialog open .heading=${true} @closed=${this.closeDialog} @close-dialog=${this.closeDialog}>
         <ha-dialog-header slot="heading">
-          <ha-icon-button slot="navigationIcon" dialogAction="cancel" .path=${mdiClose}>
-          </ha-icon-button>
-            <span slot="title">${localize('panels.general.dialogs.edit_master.title', this.hass.language)}</span>
+          <ha-icon-button slot="navigationIcon" dialogAction="cancel" .path=${mdiClose}></ha-icon-button>
+          <span slot="title">${localize('panels.general.dialogs.edit_master.title', this.hass.language)}</span>
         </ha-dialog-header>
         <div class="wrapper">
           <ha-textfield

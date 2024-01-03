@@ -25,8 +25,7 @@ export class ConfirmDeleteDialog extends LitElement {
     return html`
       <ha-dialog open .heading=${true} @closed=${this.closeDialog} @close-dialog=${this.closeDialog}>
         <ha-dialog-header slot="heading">
-          <ha-icon-button slot="navigationIcon" dialogAction="cancel" .path=${mdiClose}>
-          </ha-icon-button>
+          <ha-icon-button slot="navigationIcon" dialogAction="cancel" .path=${mdiClose}></ha-icon-button>
           <span slot="title">${this._params.title}</span>
         </ha-dialog-header>
         <div class="wrapper">

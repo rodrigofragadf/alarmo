@@ -1,0 +1,557 @@
+{
+  "common": {
+    "modes_short": {
+      "armed_away": "Ausente",
+      "armed_home": "Casa",
+      "armed_night": "Noite",
+      "armed_custom_bypass": "Personalizado",
+      "armed_vacation": "Férias"
+    },
+    "enabled": "Habilitado",
+    "disabled": "Desabilitado"
+  },
+  "components": {
+    "time_slider": {
+      "seconds": "segundo",
+      "minutes": "min",
+      "infinite": "infinito",
+      "none": "nenhum"
+    },
+    "editor": {
+      "ui_mode": "Para a IU",
+      "yaml_mode": "Para YAML",
+      "edit_in_yaml": "Editar em YAML"
+    },
+    "table": {
+      "filter": {
+        "label": "Filtrar itens",
+        "item": "Filtrar por {name}",
+        "hidden_items": "{number} {number, plural,\n  one {item está}\n  other {itens estão}\n} oculto(s)"
+      }
+    }
+  },
+  "title": "Painel de alarme",
+  "panels": {
+    "general": {
+      "title": "Em geral",
+      "cards": {
+        "general": {
+          "description": "Este painel define algumas configurações globais para o alarme.",
+          "fields": {
+            "disarm_after_trigger": {
+              "heading": "Desarmar após acionamento",
+              "description": "Depois que o tempo de disparo expirar, desarme o alarme em vez de retornar ao estado armado."
+            },
+            "enable_mqtt": {
+              "heading": "Habilitar MQTT",
+              "description": "Permitir que o painel de alarme seja controlado através do MQTT."
+            },
+            "enable_master": {
+              "heading": "Habilitar mestre de alarme",
+              "description": "Cria uma entidade para controlar todas as áreas simultaneamente."
+            }
+          },
+          "actions": {
+            "setup_mqtt": "Configuração MQTT",
+            "setup_master": "Configuração Mestre"
+          }
+        },
+        "modes": {
+          "title": "Modos",
+          "description": "Este painel pode ser usado para configurar os modos de armar o alarme.",
+          "modes": {
+            "armed_away": "Armado será usado quando todas as pessoas saírem de casa. Todas as portas e janelas que permitem o acesso à casa serão vigiadas, bem como sensores de movimento no interior da casa.",
+            "armed_home": "Casa armada (também conhecida como permanência armada) será usada ao definir o alarme enquanto as pessoas estiverem na casa. Todas as portas e janelas que permitem o acesso à casa serão vigiadas, mas não os sensores de movimento no interior da casa.",
+            "armed_night": "A noite armada será usada ao definir o alarme antes de dormir. Todas as portas e janelas que permitem o acesso à casa serão vigiadas e sensores de movimento selecionados (no andar de baixo) na casa.",
+            "armed_vacation": "As férias armadas podem ser usadas como uma extensão do modo de ausência armada em caso de ausência por um período mais longo. Os tempos de atraso e as respostas de disparo podem ser adaptados (conforme desejado) à distância de casa.",
+            "armed_custom_bypass": "Um modo extra para definir o seu próprio perímetro de segurança."
+          },
+          "number_sensors_active": "{number} {number, plural,\n  one {sensor}\n  other {sensors}\n} ativo",
+          "fields": {
+            "status": {
+              "heading": "Status",
+              "description": "Controla se o alarme pode ser armado neste modo."
+            },
+            "exit_delay": {
+              "heading": "Atraso de saída",
+              "description": "Ao armar o alarme, dentro deste período de tempo os sensores ainda não dispararão o alarme."
+            },
+            "entry_delay": {
+              "heading": "Atraso de entrada",
+              "description": "Tempo de atraso até que o alarme seja acionado após a ativação de um dos sensores."
+            },
+            "trigger_time": {
+              "heading": "Tempo de disparo",
+              "description": "Tempo durante o qual o alarme permanecerá no estado disparado após a ativação."
+            }
+          }
+        },
+        "mqtt": {
+          "title": "Configuração MQTT",
+          "description": "Este painel pode ser usado para configuração da interface MQTT.",
+          "fields": {
+            "state_topic": {
+              "heading": "Tópico estadual",
+              "description": "Tópico no qual as atualizações de estado são publicadas"
+            },
+            "event_topic": {
+              "heading": "Tópico do evento",
+              "description": "Tópico no qual os eventos de alarme são publicados"
+            },
+            "command_topic": {
+              "heading": "Tópico de comando",
+              "description": "Tópico que o Alarmo escuta para comandos de armar/desarmar."
+            },
+            "require_code": {
+              "heading": "Exigir código",
+              "description": "Exija que o código seja enviado com o comando."
+            },
+            "state_payload": {
+              "heading": "Configurar carga útil por estado",
+              "item": "Defina uma carga útil para o estado ''{state}''"
+            },
+            "command_payload": {
+              "heading": "Configurar carga útil por comando",
+              "item": "Defina uma carga útil para o comando ''{command}''"
+            }
+          }
+        },
+        "areas": {
+          "title": "Áreas",
+          "description": "As áreas podem ser usadas para dividir seu sistema de alarme em vários compartimentos.",
+          "no_items": "Ainda não há áreas definidas.",
+          "table": {
+            "remarks": "Observações",
+            "summary": "Esta área contém {summary_sensors} e {summary_automations}.",
+            "summary_sensors": "{number} {number, plural,\n  one {sensor}\n  outro {sensors}\n}",
+            "summary_automations": "{number} {number, plural,\n  one {sensor}\n  outro {automations}\n}"
+          },
+          "actions": {
+            "add": "Adicionar"
+          }
+        }
+      },
+      "dialogs": {
+        "create_area": {
+          "title": "Nova área",
+          "fields": {
+            "copy_from": "Copiar configurações de"
+          }
+        },
+        "edit_area": {
+          "title": "Área de edição ''{area}''",
+          "name_warning": "Observação: alterar o nome alterará o ID da entidade"
+        },
+        "remove_area": {
+          "title": "Remover área?",
+          "description": "Tem certeza de que deseja remover esta área? Esta área contém {sensors} sensores e {automations} automações, que também serão removidas."
+        },
+        "edit_master": {
+          "title": "Configuração mestre"
+        },
+        "disable_master": {
+          "title": "Desativar mestre?",
+          "description": "Tem certeza de que deseja remover o alarme mestre? Esta área contém {automations} automações, que serão removidas com esta ação."
+        }
+      }
+    },
+    "sensors": {
+      "title": "Sensores",
+      "cards": {
+        "sensors": {
+          "description": "Sensores atualmente configurados. Clique em um item para fazer alterações.",
+          "table": {
+            "no_items": "Não há sensores a serem exibidos aqui.",
+            "no_area_warning": "O sensor não está atribuído a nenhuma área.",
+            "arm_modes": "Modos de armar",
+            "always_on": "(Sempre)"
+          }
+        },
+        "add_sensors": {
+          "title": "Adicionar sensores",
+          "description": "Adicione mais sensores. Certifique-se de que seus sensores tenham um nome adequado para que você possa identificá-los.",
+          "no_items": "Não há entidades HA disponíveis que possam ser configuradas para o alarme. Certifique-se de incluir entidades do tipo binary_sensor.",
+          "table": {
+            "type": "Tipo detectado"
+          },
+          "actions": {
+            "add_to_alarm": "adicionar ao alarme",
+            "filter_supported": "Ocultar itens de tipo desconhecido"
+          }
+        },
+        "editor": {
+          "title": "Editar sensor",
+          "description": "Definindo as configurações do sensor de ''{entity}''.",
+          "fields": {
+            "area": {
+              "heading": "Área",
+              "description": "Selecione uma área que contenha este sensor."
+            },
+            "group": {
+              "heading": "Grupo",
+              "description": "Agrupe com outros sensores para disparo combinado."
+            },
+            "device_type": {
+              "heading": "Tipo de dispositivo",
+              "description": "Escolha um tipo de dispositivo para aplicar automaticamente as configurações apropriadas.",
+              "choose": {
+                "door": {
+                  "name": "Porta",
+                  "description": "Uma porta, portão ou outra entrada usada para entrar/sair de casa."
+                },
+                "window": {
+                  "name": "Janela",
+                  "description": "Uma janela ou porta não utilizada para entrar na casa, como uma varanda."
+                },
+                "motion": {
+                  "name": "Movimento",
+                  "description": "Sensor de presença ou dispositivo similar com atraso entre ativações."
+                },
+                "tamper": {
+                  "name": "Adulteração",
+                  "description": "Detector de remoção da tampa do sensor, sensor de quebra de vidro, etc."
+                },
+                "environmental": {
+                  "name": "Ambiental",
+                  "description": "Sensor de fumaça/gás, detector de vazamento, etc. (não relacionado à proteção contra roubo)."
+                },
+                "other": {
+                  "name": "Genérico"
+                }
+              }
+            },
+            "always_on": {
+              "heading": "Sempre",
+              "description": "O sensor deve sempre acionar o alarme."
+            },
+            "modes": {
+              "heading": "Modos ativados",
+              "description": "Modos de alarme em que este sensor está ativo."
+            },
+            "arm_on_close": {
+              "heading": "Braço após fechar",
+              "description": "Após a desativação deste sensor, o atraso de saída restante será automaticamente ignorado."
+            },
+            "use_exit_delay": {
+              "heading": "Usar atraso de saída",
+              "description": "O sensor pode estar ativo quando o retardo de saída começa."
+            },
+            "use_entry_delay": {
+              "heading": "Usar atraso de entrada",
+              "description": "A ativação do sensor aciona o alarme após o atraso de entrada, e não diretamente."
+            },
+            "allow_open": {
+              "heading": "Permitir abertura inicialmente",
+              "description": "O estado aberto enquanto armado é ignorado (a ativação subsequente do sensor acionará o alarme)."
+            },
+            "auto_bypass": {
+              "heading": "Ignorar automaticamente",
+              "description": "Exclua este sensor do alarme se estiver aberto durante o armamento.",
+              "modes": "Modos em que o sensor pode ser ignorado"
+            },
+            "trigger_unavailable": {
+              "heading": "Acionar quando indisponível",
+              "description": "Quando o estado do sensor se tornar 'indisponível', isso ativará o sensor."
+            }
+          },
+          "actions": {
+            "toggle_advanced": "Configurações avançadas",
+            "remove": "Remover",
+            "setup_groups": "Configurar grupos"
+          },
+          "errors": {
+            "description": "Por favor corrija os seguintes erros:",
+            "no_area": "Nenhuma área está selecionada",
+            "no_modes": "Nenhum modo é selecionado para o qual o sensor deva estar ativo",
+            "no_auto_bypass_modes": "Nenhum modo é selecionado para que o sensor possa ser ignorado automaticamente"
+          }
+        }
+      },
+      "dialogs": {
+        "manage_groups": {
+          "title": "Gerenciar grupos de sensores",
+          "description": "Num grupo de sensores, vários sensores devem ser ativados dentro de um período de tempo antes que o alarme seja acionado.",
+          "no_items": "Nenhum grupo ainda",
+          "actions": {
+            "new_group": "Novo grupo"
+          }
+        },
+        "create_group": {
+          "title": "Novo grupo de sensores",
+          "fields": {
+            "name": {
+              "heading": "Nome",
+              "description": "Nome do grupo de sensores"
+            },
+            "timeout": {
+              "heading": "Tempo esgotado",
+              "description": "Período de tempo durante o qual ativações consecutivas do sensor acionam o alarme."
+            },
+            "sensors": {
+              "heading": "Sensores",
+              "description": "Selecione os sensores contidos neste grupo."
+            }
+          },
+          "errors": {
+            "invalid_name": "Nome inválido fornecido.",
+            "insufficient_sensors": "Pelo menos 2 sensores precisam ser selecionados."
+          }
+        },
+        "edit_group": {
+          "title": "Editar grupo de sensores ''{name}''"
+        }
+      }
+    },
+    "codes": {
+      "title": "Códigos",
+      "cards": {
+        "codes": {
+          "description": "Altere as configurações do código.",
+          "fields": {
+            "code_arm_required": {
+              "heading": "Exigir código para armar",
+              "description": "Um código válido deve ser fornecido para armar o alarme."
+            },
+            "code_disarm_required": {
+              "heading": "Exigir código para desarmar",
+              "description": "Um código válido deve ser fornecido para desarmar o alarme."
+            },
+            "code_mode_change_required": {
+              "heading": "Exigir código para alternar o modo",
+              "description": "Um código válido deve ser fornecido para alterar o modo de armar que está ativo."
+            },
+            "code_format": {
+              "heading": "Formato de código",
+              "description": "Define o tipo de entrada para cartão de alarme Lovelace.",
+              "code_format_number": "código PIN",
+              "code_format_text": "senha"
+            }
+          }
+        },
+        "user_management": {
+          "title": "Gerenciamento de usuários",
+          "description": "Cada usuário possui seu próprio código para armar/desarmar o alarme.",
+          "no_items": "Ainda não há usuários",
+          "actions": {
+            "new_user": "novo usuário"
+          }
+        },
+        "new_user": {
+          "title": "Criar novo usuário",
+          "description": "Podem ser criados usuários para fornecer acesso à operação do alarme.",
+          "fields": {
+            "name": {
+              "heading": "Nome",
+              "description": "Nome do usuário."
+            },
+            "code": {
+              "heading": "Código",
+              "description": "Código para este usuário."
+            },
+            "confirm_code": {
+              "heading": "Confirmar código",
+              "description": "Repita o código."
+            },
+            "can_arm": {
+              "heading": "Permitir código para armar",
+              "description": "Inserir este código ativa o alarme"
+            },
+            "can_disarm": {
+              "heading": "Permitir código para desarmar",
+              "description": "Inserir este código desativa o alarme"
+            },
+            "is_override_code": {
+              "heading": "É um código de substituição",
+              "description": "Inserir este código armará o alarme em vigor"
+            },
+            "area_limit": {
+              "heading": "Áreas restritas",
+              "description": "Limitar o usuário a controlar apenas as áreas selecionadas"
+            }
+          },
+          "errors": {
+            "no_name": "Nenhum nome fornecido.",
+            "no_code": "O código deve ter no mínimo 4 caracteres/números.",
+            "code_mismatch": "Os códigos não coincidem."
+          }
+        },
+        "edit_user": {
+          "title": "Editar usuário",
+          "description": "Altere a configuração do usuário ''{name}''.",
+          "fields": {
+            "old_code": {
+              "heading": "Código atual",
+              "description": "Código atual, deixe em branco para deixar inalterado."
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "title": "Ações",
+      "cards": {
+        "notifications": {
+          "title": "Notificações",
+          "description": "Utilizando este painel, você pode gerenciar notificações a serem enviadas quando ocorrer um determinado evento de alarme.",
+          "table": {
+            "no_items": "Ainda não há notificações criadas.",
+            "no_area_warning": "A ação não é atribuída a nenhuma área."
+          },
+          "actions": {
+            "new_notification": "nova notificação"
+          }
+        },
+        "actions": {
+          "description": "Este painel pode ser usado para alternar um dispositivo quando o estado do alarme muda.",
+          "table": {
+            "no_items": "Ainda não há ações criadas."
+          },
+          "actions": {
+            "new_action": "nova ação"
+          }
+        },
+        "new_notification": {
+          "title": "Configurar notificação",
+          "description": "Receba uma notificação ao armar/desarmar o alarme, na ativação, etc.",
+          "trigger": "Doença",
+          "action": "Tarefa",
+          "options": "Opções",
+          "fields": {
+            "event": {
+              "heading": "Evento",
+              "description": "Quando a notificação deve ser enviada",
+              "choose": {
+                "armed": {
+                  "name": "O alarme está armado",
+                  "description": "O alarme foi armado com sucesso"
+                },
+                "disarmed": {
+                  "name": "O alarme está desarmado",
+                  "description": "O alarme está desarmado"
+                },
+                "triggered": {
+                  "name": "O alarme é acionado",
+                  "description": "O alarme é acionado"
+                },
+                "untriggered": {
+                  "name": "Alarme não é mais acionado",
+                  "description": "O estado acionado do alarme terminou"
+                },
+                "arm_failure": {
+                  "name": "Falha ao armar",
+                  "description": "O armamento do alarme falhou devido a um ou mais sensores abertos"
+                },
+                "arming": {
+                  "name": "Atraso de saída iniciado",
+                  "description": "Atraso de saída iniciado, pronto para sair de casa."
+                },
+                "pending": {
+                  "name": "Atraso de entrada iniciado",
+                  "description": "Atraso de entrada iniciado, o alarme disparará em breve."
+                }
+              }
+            },
+            "mode": {
+              "heading": "Modo",
+              "description": "Limite a ação a modos de armar específicos (opcional)"
+            },
+            "title": {
+              "heading": "Título",
+              "description": "Título da mensagem de notificação"
+            },
+            "message": {
+              "heading": "Mensagem",
+              "description": "Conteúdo da mensagem de notificação",
+              "insert_wildcard": "Inserir curinga",
+              "placeholders": {
+                "armed": "O alarme está definido para {{arm_mode}}",
+                "disarmed": "O alarme agora está DESLIGADO",
+                "triggered": "O alarme é acionado! Causa: {{open_sensors}}.",
+                "untriggered": "O alarme não é mais acionado.",
+                "arm_failure": "Não foi possível armar o alarme neste momento devido a: {{open_sensors}}.",
+                "arming": "O alarme será acionado em breve, por favor saia de casa.",
+                "pending": "O alarme está prestes a disparar, desarme-o rapidamente!"
+              }
+            },
+            "open_sensors_format": {
+              "heading": "Formato para curinga open_sensors",
+              "description": "Escolha quais informações do sensor serão inseridas na mensagem",
+              "options": {
+                "default": "Nomes e estados",
+                "short": "Apenas nomes"
+              }
+            },
+            "arm_mode_format": {
+              "heading": "Tradução para curinga arm_mode",
+              "description": "Escolha em qual idioma o modo armar será inserido na mensagem"
+            },
+            "target": {
+              "heading": "Alvo",
+              "description": "Dispositivo para enviar a notificação"
+            },
+            "name": {
+              "heading": "Nome",
+              "description": "Descrição desta notificação",
+              "placeholders": {
+                "armed": "Notificar {target} ao armar",
+                "disarmed": "Notificar {target} ao desarmar",
+                "triggered": "Notificar {target} quando acionado",
+                "untriggered": "Notificar {target} quando o acionamento parar",
+                "arm_failure": "Notificar {target} em caso de falha",
+                "arming": "Notificar {target} ao sair",
+                "pending": "Notificar {target} ao chegar"
+              }
+            },
+            "delete": {
+              "heading": "Excluir automação",
+              "description": "Remover permanentemente esta automação"
+            }
+          },
+          "actions": {
+            "test": "Tente"
+          }
+        },
+        "new_action": {
+          "title": "Configurar ação",
+          "description": "Ligue luzes ou dispositivos (como sirenes) ao armar/desarmar o alarme, ao ativá-lo, etc.",
+          "fields": {
+            "event": {
+              "heading": "Evento",
+              "description": "Quando a ação deve ser executada"
+            },
+            "area": {
+              "heading": "Área",
+              "description": "Área à qual o evento se aplica, deixe em branco para selecionar o alarme global."
+            },
+            "mode": {
+              "heading": "Modo",
+              "description": "Limite a ação a modos de armar específicos (opcional)"
+            },
+            "entity": {
+              "heading": "Entidade",
+              "description": "Entidade na qual executar a ação"
+            },
+            "action": {
+              "heading": "Ação",
+              "description": "Ação a ser executada na entidade",
+              "no_common_actions": "As ações só podem ser atribuídas no modo YAML para as entidades selecionadas."
+            },
+            "name": {
+              "heading": "Nome",
+              "description": "Descrição desta ação",
+              "placeholders": {
+                "armed": "Defina {entity} como {state} ao armar",
+                "disarmed": "Defina {entity} como {state} ao desarmar",
+                "triggered": "Defina {entity} como {state} quando acionado",
+                "untriggered": "Defina {entity} como {state} ao acionar paradas",
+                "arm_failure": "Defina {entity} como {state} em caso de falha",
+                "arming": "Defina {entity} como {state} ao sair",
+                "pending": "Defina {entity} como {state} ao chegar"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

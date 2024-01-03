@@ -58,18 +58,17 @@ export class CreateAreaDialog extends SubscribeMixin(LitElement) {
     return html`
       <ha-dialog open .heading=${true} @closed=${this.closeDialog} @close-dialog=${this.closeDialog}>
         <ha-dialog-header slot="heading">
-          <ha-icon-button slot="navigationIcon" dialogAction="cancel" .path=${mdiClose}>
-          </ha-icon-button>
-            <span slot="title">
-              ${this.area_id
-                ? localize(
-                    'panels.general.dialogs.edit_area.title',
-                    this.hass.language,
-                    '{area}',
-                    this.areas[this.area_id!].name
-                  )
-                : localize('panels.general.dialogs.create_area.title', this.hass.language)}
-            </span>
+          <ha-icon-button slot="navigationIcon" dialogAction="cancel" .path=${mdiClose}></ha-icon-button>
+          <span slot="title">
+            ${this.area_id
+              ? localize(
+                  'panels.general.dialogs.edit_area.title',
+                  this.hass.language,
+                  '{area}',
+                  this.areas[this.area_id!].name
+                )
+              : localize('panels.general.dialogs.create_area.title', this.hass.language)}
+          </span>
         </ha-dialog-header>
         <div class="wrapper">
           <ha-textfield

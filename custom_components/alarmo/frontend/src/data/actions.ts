@@ -256,7 +256,7 @@ export const computeMergedActions = (...actionLists: string[][]) => {
 export const computeActions = (
   entity_id: string | undefined | (string | undefined)[],
   hass: HomeAssistant,
-  recursionDepth: number = 1
+  recursionDepth = 1
 ): string[] => {
   if (recursionDepth > 10) return [];
   if (Array.isArray(entity_id)) {
@@ -296,10 +296,10 @@ export const getAutomationEntities = (hass: HomeAssistant, additionalEntities?: 
 };
 
 export const getEntitiesByDomain = (hass: HomeAssistant, ...domains: string[]) => {
-  let entities = [...Object.keys(hass.states).filter(e => domains.includes(computeDomain(e)))];
+  const entities = [...Object.keys(hass.states).filter(e => domains.includes(computeDomain(e)))];
   entities.sort(sortAlphabetically);
   return entities;
-}
+};
 
 export const getWildcardOptions = (event?: EAlarmEvent, alarmoConfig?: AlarmoConfig) => {
   let options: { name: string; value: string }[] = [];
@@ -355,8 +355,8 @@ export const getWildcardOptions = (event?: EAlarmEvent, alarmoConfig?: AlarmoCon
         value: '{{arm_mode}}',
       },
     ];
-  
-    if (!event || [EAlarmEvent.Arming, EAlarmEvent.Pending].includes(event))
+
+  if (!event || [EAlarmEvent.Arming, EAlarmEvent.Pending].includes(event))
     options = [
       ...options,
       {

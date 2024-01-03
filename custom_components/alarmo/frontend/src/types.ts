@@ -1,4 +1,11 @@
-import { HassEntity, HassEntityAttributeBase, MessageBase, Connection, HassEntities, HassServices } from 'home-assistant-js-websocket';
+import {
+  HassEntity,
+  HassEntityAttributeBase,
+  MessageBase,
+  Connection,
+  HassEntities,
+  HassServices,
+} from 'home-assistant-js-websocket';
 import { ESensorTypes } from './const';
 
 export interface Dictionary<TValue> {
@@ -19,7 +26,7 @@ export interface ServiceCallRequest {
 export interface HomeAssistant {
   connection: Connection;
   language: string;
-    panels: {
+  panels: {
     [name: string]: {
       component_name: string;
       config: { [key: string]: any } | null;
@@ -42,15 +49,15 @@ export interface HomeAssistant {
     };
   };
   callApi: <T>(
-    method: "GET" | "POST" | "PUT" | "DELETE",
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     path: string,
     parameters?: { [key: string]: any }
   ) => Promise<T>;
   callService: (
-    domain: ServiceCallRequest["domain"],
-    service: ServiceCallRequest["service"],
-    serviceData?: ServiceCallRequest["serviceData"],
-    target?: ServiceCallRequest["target"]
+    domain: ServiceCallRequest['domain'],
+    service: ServiceCallRequest['service'],
+    serviceData?: ServiceCallRequest['serviceData'],
+    target?: ServiceCallRequest['target']
   ) => Promise<void>;
   callWS: <T>(msg: MessageBase) => Promise<T>;
 }

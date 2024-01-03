@@ -24,7 +24,7 @@ export class MyAlarmPanel extends LitElement {
 
   async firstUpdated() {
     window.addEventListener('location-changed', () => {
-      if(!window.location.pathname.includes('alarmo')) return;
+      if (!window.location.pathname.includes('alarmo')) return;
       this.requestUpdate();
     });
 

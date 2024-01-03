@@ -23,7 +23,7 @@ export default [
     input: 'src/alarm-panel.ts',
     output: {
       dir: 'dist',
-      format: 'iife',
+      format: 'amd',
       sourcemap: false
     },
     plugins: [...plugins],

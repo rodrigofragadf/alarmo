@@ -30,7 +30,7 @@ export function isEqual(...arr: any[]) {
 }
 
 export function Unique<TValue>(arr: TValue[]) {
-  let res: TValue[] = [];
+  const res: TValue[] = [];
   arr.forEach(item => {
     if (!res.find(e => (typeof item === 'object' ? isEqual(e, item) : e === item))) res.push(item);
   });
@@ -173,68 +173,64 @@ export function sortAlphabetically(a: string | { name: string }, b: string | { n
   return stringVal(a) < stringVal(b) ? -1 : 1;
 }
 
-export const navigate = (
-  _node: any,
-  path: string,
-  replace: boolean = false
-) => {
+export const navigate = (_node: any, path: string, replace = false) => {
   if (replace) {
-    history.replaceState(null, "", path);
+    history.replaceState(null, '', path);
   } else {
-    history.pushState(null, "", path);
+    history.pushState(null, '', path);
   }
-  fireEvent(window, "location-changed", {
-    replace
+  fireEvent(window, 'location-changed', {
+    replace,
   });
 };
 
 export function computeDomain(entityId: string): string {
-  return entityId.substr(0, entityId.indexOf("."));
+  return entityId.substr(0, entityId.indexOf('.'));
 }
 
 export function computeEntity(entityId: string): string {
-  return entityId.substr(entityId.indexOf(".") + 1);
+  return entityId.substr(entityId.indexOf('.') + 1);
 }
 
 export function domainIcon(domain: string, state?: string): string {
   const fixedIcons = {
-    alert: "mdi:alert",
-    automation: "mdi:playlist-play",
-    calendar: "mdi:calendar",
-    camera: "mdi:video",
-    climate: "mdi:thermostat",
-    configurator: "mdi:settings",
-    conversation: "mdi:text-to-speech",
-    device_tracker: "mdi:account",
-    fan: "mdi:fan",
-    group: "mdi:google-circles-communities",
-    history_graph: "mdi:chart-line",
-    homeassistant: "mdi:home-assistant",
-    homekit: "mdi:home-automation",
-    image_processing: "mdi:image-filter-frames",
-    input_boolean: "mdi:drawing",
-    input_datetime: "mdi:calendar-clock",
-    input_number: "mdi:ray-vertex",
-    input_select: "mdi:format-list-bulleted",
-    input_text: "mdi:textbox",
-    light: "mdi:lightbulb",
-    mailbox: "mdi:mailbox",
-    notify: "mdi:comment-alert",
-    person: "mdi:account",
-    plant: "mdi:flower",
-    proximity: "mdi:apple-safari",
-    remote: "mdi:remote",
-    scene: "mdi:google-pages",
-    script: "mdi:file-document",
-    sensor: "mdi:eye",
-    simple_alarm: "mdi:bell",
-    sun: "mdi:white-balance-sunny",
-    switch: "mdi:flash",
-    timer: "mdi:timer",
-    updater: "mdi:cloud-upload",
-    vacuum: "mdi:robot-vacuum",
-    water_heater: "mdi:thermometer",
-    weblink: "mdi:open-in-new"
+    alert: 'mdi:alert',
+    automation: 'mdi:playlist-play',
+    calendar: 'mdi:calendar',
+    camera: 'mdi:video',
+    climate: 'mdi:thermostat',
+    configurator: 'mdi:settings',
+    conversation: 'mdi:text-to-speech',
+    device_tracker: 'mdi:account',
+    fan: 'mdi:fan',
+    group: 'mdi:google-circles-communities',
+    history_graph: 'mdi:chart-line',
+    homeassistant: 'mdi:home-assistant',
+    homekit: 'mdi:home-automation',
+    image_processing: 'mdi:image-filter-frames',
+    input_boolean: 'mdi:drawing',
+    input_datetime: 'mdi:calendar-clock',
+    input_number: 'mdi:ray-vertex',
+    input_select: 'mdi:format-list-bulleted',
+    input_text: 'mdi:textbox',
+    light: 'mdi:lightbulb',
+    mailbox: 'mdi:mailbox',
+    notify: 'mdi:comment-alert',
+    person: 'mdi:account',
+    plant: 'mdi:flower',
+    proximity: 'mdi:apple-safari',
+    remote: 'mdi:remote',
+    scene: 'mdi:google-pages',
+    script: 'mdi:file-document',
+    sensor: 'mdi:eye',
+    simple_alarm: 'mdi:bell',
+    sun: 'mdi:white-balance-sunny',
+    switch: 'mdi:flash',
+    timer: 'mdi:timer',
+    updater: 'mdi:cloud-upload',
+    vacuum: 'mdi:robot-vacuum',
+    water_heater: 'mdi:thermometer',
+    weblink: 'mdi:open-in-new',
   };
 
   if (domain in fixedIcons) {
@@ -242,49 +238,45 @@ export function domainIcon(domain: string, state?: string): string {
   }
 
   switch (domain) {
-    case "alarm_control_panel":
+    case 'alarm_control_panel':
       switch (state) {
-        case "armed_home":
-          return "mdi:bell-plus";
-        case "armed_night":
-          return "mdi:bell-sleep";
-        case "disarmed":
-          return "mdi:bell-outline";
-        case "triggered":
-          return "mdi:bell-ring";
+        case 'armed_home':
+          return 'mdi:bell-plus';
+        case 'armed_night':
+          return 'mdi:bell-sleep';
+        case 'disarmed':
+          return 'mdi:bell-outline';
+        case 'triggered':
+          return 'mdi:bell-ring';
         default:
-          return "mdi:bell";
+          return 'mdi:bell';
       }
 
-    case "binary_sensor":
-      return state && state === "off"
-        ? "mdi:radiobox-blank"
-        : "mdi:checkbox-marked-circle";
+    case 'binary_sensor':
+      return state && state === 'off' ? 'mdi:radiobox-blank' : 'mdi:checkbox-marked-circle';
 
-    case "cover":
-      return state === "closed" ? "mdi:window-closed" : "mdi:window-open";
+    case 'cover':
+      return state === 'closed' ? 'mdi:window-closed' : 'mdi:window-open';
 
-    case "lock":
-      return state && state === "unlocked" ? "mdi:lock-open" : "mdi:lock";
+    case 'lock':
+      return state && state === 'unlocked' ? 'mdi:lock-open' : 'mdi:lock';
 
-    case "media_player":
-      return state && state !== "off" && state !== "idle"
-        ? "mdi:cast-connected"
-        : "mdi:cast";
+    case 'media_player':
+      return state && state !== 'off' && state !== 'idle' ? 'mdi:cast-connected' : 'mdi:cast';
 
-    case "zwave":
+    case 'zwave':
       switch (state) {
-        case "dead":
-          return "mdi:emoticon-dead";
-        case "sleeping":
-          return "mdi:sleep";
-        case "initializing":
-          return "mdi:timer-sand";
+        case 'dead':
+          return 'mdi:emoticon-dead';
+        case 'sleeping':
+          return 'mdi:sleep';
+        case 'initializing':
+          return 'mdi:timer-sand';
         default:
-          return "mdi:z-wave";
+          return 'mdi:z-wave';
       }
 
     default:
-      return "mdi:bookmark";
+      return 'mdi:bookmark';
   }
 }

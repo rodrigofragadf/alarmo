@@ -1,10 +1,19 @@
+/* eslint-disable */
 import { LitElement, html, CSSResultGroup, css } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { UnsubscribeFunc } from 'home-assistant-js-websocket';
 
 import { commonStyle } from '../../styles';
 import { localize } from '../../../localize/localize';
-import { AlarmoModeConfig, AlarmoConfig, EArmModes, Dictionary, AlarmoArea, AlarmoSensor, HomeAssistant } from '../../types';
+import {
+  AlarmoModeConfig,
+  AlarmoConfig,
+  EArmModes,
+  Dictionary,
+  AlarmoArea,
+  AlarmoSensor,
+  HomeAssistant,
+} from '../../types';
 import { fetchAreas, fetchSensors, saveArea } from '../../data/websockets';
 import { handleError } from '../../helpers';
 import { SubscribeMixin } from '../../subscribe-mixin';
@@ -125,7 +134,9 @@ export class AlarmModeCard extends SubscribeMixin(LitElement) {
   }
 
   getSensorsByMode(mode: EArmModes) {
-    return Object.values(this.sensors).filter(e => e.area == this.selectedArea && (e.modes.includes(mode) || e.always_on)).length;
+    return Object.values(this.sensors).filter(
+      e => e.area == this.selectedArea && (e.modes.includes(mode) || e.always_on)
+    ).length;
   }
 
   renderModeConfig(mode: EArmModes) {

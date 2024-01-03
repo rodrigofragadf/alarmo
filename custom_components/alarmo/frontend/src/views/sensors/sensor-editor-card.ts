@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { mdiClose } from '@mdi/js';
@@ -32,7 +33,7 @@ export class SensorEditorCard extends SubscribeMixin(LitElement) {
   data?: AlarmoSensor;
 
   @property()
-  showBypassModes: boolean = false;
+  showBypassModes = false;
 
   areas!: Dictionary<AlarmoArea>;
   sensorGroups!: Dictionary<SensorGroup>;
@@ -317,26 +318,24 @@ export class SensorEditorCard extends SubscribeMixin(LitElement) {
                   : ''}
               `
             : ''}
+          ${!this.data.type || [ESensorTypes.Window, ESensorTypes.Door, ESensorTypes.Other].includes(this.data.type)
+            ? html`
+                <settings-row .narrow=${this.narrow}>
+                  <span slot="heading">
+                    ${localize('panels.sensors.cards.editor.fields.allow_open.heading', this.hass.language)}
+                  </span>
+                  <span slot="description">
+                    ${localize('panels.sensors.cards.editor.fields.allow_open.description', this.hass.language)}
+                  </span>
 
-        ${(!this.data.type || [ESensorTypes.Window, ESensorTypes.Door, ESensorTypes.Other].includes(this.data.type))
-          ? html`
-              <settings-row .narrow=${this.narrow}>
-                <span slot="heading">
-                  ${localize('panels.sensors.cards.editor.fields.allow_open.heading', this.hass.language)}
-                </span>
-                <span slot="description">
-                  ${localize('panels.sensors.cards.editor.fields.allow_open.description', this.hass.language)}
-                </span>
-
-                <ha-switch
-                  ?checked=${this.data.allow_open}
-                  ?disabled=${this.data.always_on || this.data.arm_on_close}
-                  @change=${(ev: Event) =>
-                    this._SetData({ allow_open: (ev.target as HTMLInputElement).checked })}
-                ></ha-switch>
-              </settings-row>
-            `
-          : ''}
+                  <ha-switch
+                    ?checked=${this.data.allow_open}
+                    ?disabled=${this.data.always_on || this.data.arm_on_close}
+                    @change=${(ev: Event) => this._SetData({ allow_open: (ev.target as HTMLInputElement).checked })}
+                  ></ha-switch>
+                </settings-row>
+              `
+            : ''}
 
           <settings-row .narrow=${this.narrow}>
             <span slot="heading">
@@ -401,7 +400,7 @@ export class SensorEditorCard extends SubscribeMixin(LitElement) {
           break;
         case 'use_exit_delay':
           this.data = { ...this.data, use_exit_delay: val == true };
-          if(this.data.type === ESensorTypes.Motion && !val) this.data = {...this.data, allow_open: false};
+          if (this.data.type === ESensorTypes.Motion && !val) this.data = { ...this.data, allow_open: false };
           break;
         case 'arm_on_close':
           this.data = { ...this.data, arm_on_close: val == true };

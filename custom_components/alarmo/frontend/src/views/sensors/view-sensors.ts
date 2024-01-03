@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { loadHaForm } from '../../load-ha-elements';
